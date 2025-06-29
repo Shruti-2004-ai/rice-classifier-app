@@ -46,3 +46,5 @@ A machine learning-based rice grain classifier that predicts the type of rice fr
 ```bash
 python -m venv venv
 venv\\Scripts\\activate
+pip install -r requirements.txt
+build_exe.bat
