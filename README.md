@@ -1,98 +1,87 @@
+# 🌾 Rice Classifier Web App
 
-# 🍚 Rice Classifier Desktop App
-
-A machine learning-based rice grain classifier that predicts the type of rice from an uploaded image. This version is packaged as a standalone `.exe` for Windows — no Python installation required!
-
----
-
-## 🖼️ Supported Rice Types
-
-- Arborio
-- Basmati
-- Ipsala
-- Jasmine
-- Karacadag
+A machine learning-powered web application built with Streamlit that classifies rice grains into different types based on uploaded images. This app uses a pre-trained TensorFlow model and is deployed online via Streamlit Cloud.
 
 ---
 
-## 🚀 Features
+## 📸 Features
 
-- ✅ Predict rice type from an image
-- 📦 Works offline (runs as `.exe`)
-- 📷 Supports `.jpg`, `.png`, `.jpeg` files
-- 🖥️ No Python needed for end-users
-- 🧠 Uses TensorFlow trained model
-
----
-
-## 📁 Included Files
-
-| File | Description |
-|------|-------------|
-| `rice_app.py` | Main Streamlit app |
-| `rice_type_classifier.h5` | Trained rice classification model |
-| `samplecrop (1).jpg` | Example test image |
-| `build_exe.bat` | Script to convert app into `.exe` |
-| `requirements.txt` | Optional - library list for devs |
+- Upload your own rice grain image
+- Use a demo image
+- Predict rice type (Arborio, Basmati, Ipsala, Jasmine, Karacadag)
+- View prediction confidence
+- Rate predictions for feedback
+- Fully responsive and mobile-friendly UI
 
 ---
 
-### 🔧 1. Create a virtual environment
+## 🌐 Live App
 
-```bash
-python -m venv venv
-venv\\Scripts\\activate
+👉 [Launch the app](https://rice-classifier-app-tj38v4yqjgs5t9ykdclyuq.streamlit.app)
 
-## 🗂 Project Structure
+---
+
+## 🧠 Model
+
+- Trained on a dataset of labeled rice grain images
+- Uses a Keras `.h5` model file
+- Input size: 224x224 RGB images
+- Output: 5-class classification
+
+---
+
+## 📁 File Structure
 
 ```
-
 rice-classifier-app/
-├── rice\_app.py               # Main app script (Streamlit)
-├── rice\_type\_classifier.h5   # Pre-trained Keras model
-├── samplecrop (1).jpg        # Sample rice image for demo
-├── requirements.txt          # List of dependencies
+├── rice_app.py               # Main Streamlit app
+├── rice_type_classifier.h5   # Pretrained model
+├── samplecrop (1).jpg        # Demo image
+├── requirements.txt          # Package dependencies
 └── README.md                 # This file
-
-````
+```
 
 ---
 
-## 🛠 How to Run the App Locally
+## 🛠 Run Locally
 
-### 1. Clone the Repository
+### 1. Clone the repo
+
 ```bash
 git clone https://github.com/Shruti-2004-ai/rice-classifier-app.git
 cd rice-classifier-app
 ```
 
-### 2. Create a Virtual Environment
-```bash
-python -m venv venv
-venv\Scripts\activate
+### 2. Install dependencies
 
-### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run the App
+### 3. Run the app
 
 ```bash
 streamlit run rice_app.py
 ```
 
-Then open your browser to `http://localhost:8501`
+Open [http://localhost:8501](http://localhost:8501) in your browser.
 
+---
 
-## 🌐 Online Demo
+## 💻 Compatible With
 
-🔗 [Click to Open the Live App](https://rice-classifier-app-tj38v4yqjgs5t9ykdclyuq.streamlit.app)
+- Python 3.9 or 3.11
+- TensorFlow 2.11+
+- Streamlit 1.20+
 
+---
 
-
-## 👤 Author
+## 🙋 Author
 
 Developed by [Shruti-2004-ai](https://github.com/Shruti-2004-ai)
 
+---
 
+## 📄 License
+
+MIT License
