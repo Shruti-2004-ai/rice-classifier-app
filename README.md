@@ -37,10 +37,6 @@ A machine learning-based rice grain classifier that predicts the type of rice fr
 
 ---
 
-## 🏗️ Build Instructions (for Developers)
-
-> Optional – only needed if you want to generate the `.exe` yourself.
-
 ### 🔧 1. Create a virtual environment
 
 ```bash
@@ -59,9 +55,6 @@ rice-classifier-app/
 └── README.md                 # This file
 
 ````
-
----
-
 ## 🛠 How to Run the App Locally
 
 ### 1. Clone the Repository
@@ -69,7 +62,6 @@ rice-classifier-app/
 ```bash
 git clone https://github.com/Shruti-2004-ai/rice-classifier-app.git
 cd rice-classifier-app
-````
 
 ### 2. (Optional) Create a Virtual Environment
 
