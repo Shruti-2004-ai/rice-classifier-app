@@ -58,23 +58,18 @@ rice-classifier-app/
 ## 🛠 How to Run the App Locally
 
 ### 1. Clone the Repository
-
-```bash
 git clone https://github.com/Shruti-2004-ai/rice-classifier-app.git
 cd rice-classifier-app
 
-### 2. (Optional) Create a Virtual Environment
-
-```bash
+### 2. Create a Virtual Environment
 python -m venv venv
 venv\Scripts\activate
-```
+
 
 ### 3. Install Dependencies
 
-```bash
 pip install -r requirements.txt
-```
+
 
 ### 4. Run the App
 
