@@ -1,12 +1,13 @@
 import streamlit as st
-from PIL import Image
-import numpy as np
 import tensorflow as tf
+import numpy as np
+from PIL import Image
 import pandas as pd
 import os
 
-# Load model
-model = tf.keras.models.load_model("rice_type_classifier.h5")
+# ✅ Load model correctly (only once)
+model = tf.keras.models.load_model(r"C:\Users\msski\Downloads\ProjectRice\rice_type_classifier.h5")
+
 class_names = ['Ipsala', 'Jasmine', 'Karacadag']
 
 st.set_page_config(page_title="🌾 Rice Type Classifier", layout="centered")
