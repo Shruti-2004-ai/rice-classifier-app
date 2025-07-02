@@ -8,7 +8,21 @@ import os
 # ✅ Load model correctly (only once)
 model = tf.keras.models.load_model(r"C:\Users\msski\Downloads\ProjectRice\rice_type_classifier.h5")
 
-class_names = ['Ipsala', 'Jasmine', 'Karacadag']
+
+train_gen = datagen.flow_from_directory(
+    data_dir,
+    target_size=img_size,
+    batch_size=batch_size,
+    subset='training',
+    class_mode='categorical'
+)
+class_names = ['Arborio', 'Basmati', 'Ipsala', 'Jasmine', 'Karacadag']
+
+
+
+# ✅ Add this line to print class-to-index mapping
+print(train_gen.class_indices)
+
 
 st.set_page_config(page_title="🌾 Rice Type Classifier", layout="centered")
 
@@ -64,3 +78,4 @@ with st.form("feedback_form"):
         else:
             df.to_csv("user_feedback.csv", index=False)
         st.success("✅ Thank you for your feedback!")
+
