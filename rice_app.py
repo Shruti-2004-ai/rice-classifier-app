@@ -19,35 +19,40 @@ st.markdown("<p style='text-align: center;'>Upload an image of a rice grain to i
 uploaded_file = st.file_uploader("📷 Choose a rice grain image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
-    image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="✅ Image Uploaded", use_container_width=True)
+    try:
+        image = Image.open(uploaded_file).convert("RGB")
+        st.image(image, caption="✅ Image Uploaded", use_container_width=True)
 
-    # Preprocess image (kept for consistency even though not used by mock)
-    image = image.resize((64, 64))
-    img_array = np.array(image) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
+        # Preprocess image
+        image = image.resize((64, 64))
+        img_array = np.array(image) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
 
-    # --- Mock prediction ---
-    predicted_class = random.choice(class_names)
-    confidence = random.uniform(60, 100)
+        # --- Mock prediction ---
+        predicted_class = random.choice(class_names)
+        confidence = random.uniform(60, 100)
 
-    st.markdown("---")
-    st.subheader("🎯 Prediction Result")
-    st.success(f"**{predicted_class}** ({confidence:.2f}% confidence)")
+        st.markdown("---")
+        st.subheader("🎯 Prediction Result")
+        st.success(f"**{predicted_class}** ({confidence:.2f}% confidence)")
 
-    # --- Log prediction to CSV ---
-    prediction_log = {
-        "Image Name": uploaded_file.name,
-        "Predicted Class": predicted_class,
-        "Confidence (%)": f"{confidence:.2f}",
-        "Timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
-    log_df = pd.DataFrame([prediction_log])
+        # --- Log prediction to CSV ---
+        prediction_log = {
+            "Image Name": uploaded_file.name,
+            "Predicted Class": predicted_class,
+            "Confidence (%)": f"{confidence:.2f}",
+            "Timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+        }
+        log_df = pd.DataFrame([prediction_log])
 
-    if os.path.exists("predictions.csv"):
-        log_df.to_csv("predictions.csv", mode="a", index=False, header=False)
-    else:
-        log_df.to_csv("predictions.csv", index=False)
+        if os.path.exists("predictions.csv"):
+            log_df.to_csv("predictions.csv", mode="a", index=False, header=False)
+        else:
+            log_df.to_csv("predictions.csv", index=False)
+
+    except Exception as e:
+        st.error(f"⚠️ Error processing the uploaded image: {e}")
+        st.stop()
 
 # --- Feedback section ---
 st.markdown("---")
