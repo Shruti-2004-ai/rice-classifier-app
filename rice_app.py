@@ -7,7 +7,7 @@ import os
 import random  # For mock prediction
 
 # --- Class names (updated to match your dataset) ---
-class_names = ['Arborio', 'Basmati', 'Ipsala', 'Jasmine', 'Karacadag']
+class_names = ['Jasmine','Karacadag', 'Basmati', 'Ipsala','Arborio']
 
 st.set_page_config(page_title="🌾 Rice Type Classifier", layout="centered")
 
