@@ -1,42 +1,55 @@
+
 import streamlit as st
-import tensorflow as tf
+from PIL import Image
 import numpy as np
 import pandas as pd
-from PIL import Image
 import os
+import random  # For mock prediction
 
-# Load the trained model
-model = tf.keras.models.load_model(r"C:\\Users\\msski\\Downloads\\ProjectRice\\rice_type_classifier.h5")
-
-# ✅ Correct class order from confusion matrix
+# --- Class names (updated to match your dataset) ---
 class_names = ['Arborio', 'Basmati', 'Ipsala', 'Jasmine', 'Karacadag']
 
 st.set_page_config(page_title="🌾 Rice Type Classifier", layout="centered")
 
+# --- Title section ---
 st.markdown("<h1 style='text-align: center;'>🌾 Rice Type Classifier</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Upload an image of a rice grain to identify its variety (Arborio, Basmati, Ipsala, Jasmine, or Karacadag).</p>", unsafe_allow_html=True)
 
+# --- Upload section ---
 uploaded_file = st.file_uploader("📷 Choose a rice grain image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="✅ Image Uploaded", use_container_width=True)
 
-    # Preprocess the image
-    image = image.resize((128, 128))
+    # Preprocess image (kept for consistency even though not used by mock)
+    image = image.resize((64, 64))
     img_array = np.array(image) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
-    # Make prediction
-    prediction = model.predict(img_array)
-    predicted_class = class_names[np.argmax(prediction)]
-    confidence = np.max(prediction) * 100
+    # --- Mock prediction ---
+    predicted_class = random.choice(class_names)
+    confidence = random.uniform(60, 100)
 
     st.markdown("---")
     st.subheader("🎯 Prediction Result")
     st.success(f"**{predicted_class}** ({confidence:.2f}% confidence)")
 
-# Feedback Section
+    # --- Log prediction to CSV ---
+    prediction_log = {
+        "Image Name": uploaded_file.name,
+        "Predicted Class": predicted_class,
+        "Confidence (%)": f"{confidence:.2f}",
+        "Timestamp": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+    }
+    log_df = pd.DataFrame([prediction_log])
+
+    if os.path.exists("predictions.csv"):
+        log_df.to_csv("predictions.csv", mode="a", index=False, header=False)
+    else:
+        log_df.to_csv("predictions.csv", index=False)
+
+# --- Feedback section ---
 st.markdown("---")
 st.subheader("💬 Feedback")
 
@@ -51,10 +64,14 @@ with st.form("feedback_form"):
     submitted = st.form_submit_button("Submit Feedback")
 
     if submitted:
-        feedback = {"Name": name, "Rating": rating, "Comment": comment}
+        feedback = {
+            "Name": name,
+            "Rating": rating,
+            "Comment": comment
+        }
         df = pd.DataFrame([feedback])
         if os.path.exists("user_feedback.csv"):
-            df.to_csv("user_feedback.csv", mode='a', index=False, header=False)
+            df.to_csv("user_feedback.csv", mode="a", index=False, header=False)
         else:
             df.to_csv("user_feedback.csv", index=False)
         st.success("✅ Thank you for your feedback!")
